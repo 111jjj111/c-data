@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100
+
+typedef int element;
+typedef struct {
+	element data[MAX];
+	int top;
+}stackType;
+
+void init(stackType *s) {
+	return (s->top = -1);
+}
+
+int is_empty(stackType *s) {
+	return(s->top == -1);
+}
+
+int is_full(stackType *s) {
+	return(s->top == (MAX - 1));
+}
+
+void push(stackType* s, element value) {
+	if (is_full(s)) {
+		printf("스택 포화 에러\n");
+		exit(1);
+
+	}
+	else
+		s->data[++(s->top)] = value;
+}
+
+element pop(stackType* s) {
+	if (is_empty(s)) {
+		printf("스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->data[(s->top)--];
+}
+
+element peek(stackType* s) {
+	if (is_empty(s)) {
+		printf("스택 공백 에러\n");
+		exit(1);
+	}
+	else return s->data[s->top];
+}
+
+int main(void) {
+	stackType s;
+	init(&s);
+	push(&s, 1);
+	push(&s, 2);
+	push(&s, 3);
+	printf("%d\n", pop(&s));
+	printf("%d\n", pop(&s));
+	printf("%d\n", pop(&s));
+}
